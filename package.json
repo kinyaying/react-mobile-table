@@ -28,5 +28,8 @@
     "webpack": "^3.8.1",
     "webpack-dashboard": "^1.0.2",
     "webpack-dev-server": "^2.9.4"
+  },
+  "dependencies": {
+    "rc-table": "^6.1.0"
   }
 }
