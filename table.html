@@ -219,6 +219,25 @@
 
 <script>
 
+function getTotalArr(target) {
+  let sum = 0, start = 1, end = parseInt(target/2) + 1, tempArr = [];
+  while(start < end) {
+    for(var i = start; i <= end; i++) {
+      if(sum < target) {
+        sum += i;
+        tempArr.push(i);
+      } else{
+        if(sum == target) {console.log(tempArr.join('+'));}
+        start++;
+        sum = 0;
+        tempArr = [];
+        break;
+      }
+    }
+  }
+}
+getTotalArr(15);
+
     var mytable_conentent_Dom=document.getElementsByClassName("mytable_conentent")[0];
     var mytable_fixedColumn_Dom=document.getElementsByClassName("mytable_fixedColumn")[0];
     var mytable_header_left_Dom=document.getElementsByClassName("mytable_header_left")[0];
