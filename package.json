@@ -1,11 +1,11 @@
 {
-  "name": "m_mobx",
+  "name": "react-mobile-table",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dashboard -- webpack-dev-server --open --port 3001"
+    "start": "webpack-dashboard -- webpack-dev-server --open --port 9999"
   },
   "keywords": [],
   "author": "",
