@@ -1,3 +1,110 @@
 li {
   list-style: none;
 }
+
+.table-wrapper {
+  overflow: hidden;
+}
+.table {
+  position: relative;
+  * {
+    box-sizing: border-box;
+  }
+  .table-header {
+    width: 700px;
+    .table-header-left {
+      float:left;
+      overflow: hidden;
+    }
+    .table-header-right-wrapper {
+      width: 500px;
+      overflow: scroll;
+      .table-header-right {
+        float:left;
+        overflow: hidden;
+        width: 1000px;
+      }
+    }
+  }
+  .table-container {
+    width: 700px;
+    .table-content-wrapper{
+      position: relative;
+      width: 500px;
+      height: 300px;
+      overflow: scroll;
+      .table-content {
+        float:left;
+        width: 1000px;
+        // height: 300px;
+      }
+    }
+
+    .table-fixed-column {
+      position: relative;
+      height: 300px;
+      overflow: scroll;
+      .fixed-row {
+        overflow: hidden;
+      }
+      float:left;
+      // overflow: hidden;
+    }
+    .table-content-wrapper::-webkit-scrollbar, .table-fixed-column::-webkit-scrollbar {display:none}
+
+  }
+  .col {
+    display: inline-block;
+    border-right:0px solid #cccccc;
+    border-left:1px solid #cccccc;
+    border-top:1px solid #cccccc;
+    border-bottom:1px solid #cccccc;
+    border-collapse: collapse;
+
+    // margin-left:0px;
+    // margin-right:-4px;
+    width:100px;
+    height:50px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    color:#000000;
+    text-align: center;
+    line-height: 50px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    float: left;
+    overflow: hidden;
+  }
+  .headercol {
+    background-color: #0E2D5F;
+    color:white;
+    font-size: 17px;
+    text-align: center;
+  }
+  .fixedcol {
+    background-color: #1A68A2;
+    color:white;
+    font-size: 17px;
+    text-align: center;
+  }
+  .back-top {
+    height: 50px;
+    width: 50px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+
+  }
+  .load-more {
+    text-align: center;
+  }
+  .table-load-show {
+    display: block;
+  }
+  .table-load-hide {
+    display: none;
+  }
+}

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Scroller} from 'chanjet-scroller';
 
 const columns = [
   { title: 'title1', dataIndex: 'a', key: 'a', width: 100 },
@@ -37,21 +38,32 @@ const LEFT_FIXED_COL = 2;
 const TOP_FIXED_ROW = 1;
 
 class RenderTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false
+    }
+  }
 
   componentDidMount() {
-    this.tableContent.addEventListener("scroll",(event) => {
+    this.tableContentWrapper.addEventListener("scroll",(event) => {
       var target = event.target;
       this.tableLeft.scrollTop = target.scrollTop;
       this.tableHeader.scrollLeft = target.scrollLeft;
 
-      let self_height = target.offsetHeight;
-      let scroll_top = target.scrollTop;
       let client_height = target.offsetHeight;
-      console.log(1, self_height);
+      let scroll_top = target.scrollTop;
+      let self_height = this.tableContent.offsetHeight;
+      if(scroll_top + client_height > self_height - 10) {
+        this.setState({ loading: true });
+        setTimeout(() => {
+          this.setState({ loading: false });
+        }, 3000);
+      }
     },false);
     this.tableLeft.addEventListener("scroll",(event) => {
       var target = event.target;
-      this.tableContent.scrollTop = target.scrollTop;
+      this.tableContentWrapper.scrollTop = target.scrollTop;
       // this.tableHeader.scrollLeft = target.scrollLeft;
     },false);
   }
@@ -63,7 +75,7 @@ class RenderTable extends Component {
   }
 
   goTop = () => {
-    this.tableContent.scrollTop = 0;
+    this.tableContentWrapper.scrollTop = 0;
   }
 
   createLeftTop() {
@@ -115,10 +127,24 @@ class RenderTable extends Component {
           { tempArr }
         </div>)
     });
-    return (<div className="table-content-wrapper" ref={(r) => this.tableContent = r} ><div className="table-content">{headerArr}</div></div>);
+    return (<div className="table-content-wrapper" ref={(r) => this.tableContentWrapper = r} ><div className="table-content" ref={(r) => this.tableContent = r}><Scroller displayHeight={300} refreshHandler={this.onRefresh.bind(this)}>{headerArr}</Scroller></div></div>);
+  }
+
+  // onLoadMore = (done) => {
+  //   console.log('onLoadMore::');
+  //   done();
+  // }
+  //
+  // onRefresh = (done) => {
+  //   console.log('onRefresh::');
+  //   done();
+  // }
+  onRefresh(done) {
+    console.log('onRefresh:::')
   }
 
   render() {
+    console.log('this.state.loading:::', this.state.loading)
     return (
       <div className="table">
         <div className="table-header">
@@ -126,8 +152,11 @@ class RenderTable extends Component {
           { this.createHeader() }
         </div>
         <div className="table-container">
-          { this.createLeftFixed() }
-          { this.createTable() }
+
+            { this.createLeftFixed() }
+            { this.createTable() }
+          
+          <div className={`load-more ${this.state.loading ? 'table-load-show' : 'table-load-hide'}`}>加载更多...</div>
         </div>
         <div className="back-top" onClick={this.goTop}>回到顶部</div>
       </div>
@@ -146,14 +175,3 @@ class MyTable extends Component {
 
 export default MyTable;
 import './my-table.less';
-
-// {
-//   this.props.data.map((row, index) => {
-//     console.log('row::::', row)
-//     let rowDOMs = [];
-//     for(var key in row) {
-//       rowDOMs.push(<li key={key}>{row[key]}</li>);
-//     }
-//     return (<div key={index} className={`table-row ${index%2?'odd':'even'}`}>{rowDOMs}</div>);
-//   })
-// }

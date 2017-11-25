@@ -30,6 +30,8 @@
     "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
+    "chanjet-scroller": "^1.0.25",
+    "inline-style-prefixer": "^3.0.8",
     "rc-table": "^6.1.0"
   }
 }
